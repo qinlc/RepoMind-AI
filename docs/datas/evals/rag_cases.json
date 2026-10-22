@@ -1,0 +1,33 @@
+{
+  "name": "RepoMind 项目 RAG 基线",
+  "version": 1,
+  "repository_names": [
+    "qinlc/RepoMind-AI"
+  ],
+  "cases": [
+    {
+      "id": "case-001",
+      "question": "ChatAgent 的对话主循环最多允许执行多少步？",
+      "reference": "ChatAgent.max_steps 为 12。同一个工具用相同参数连续调用 2 次会被判定为重复调用，循环会提前停止。",
+      "must_include": [
+        "12"
+      ]
+    },
+    {
+      "id": "case-002",
+      "question": "上下文预算里留给模型输入的 token 上限是多少？",
+      "reference": "context_max_input_tokens 为 24000，扣除 context_reserved_response_tokens 的 3000，实际可用输入预算为 21000。",
+      "must_include": [
+        "21000"
+      ]
+    },
+    {
+      "id": "case-003",
+      "question": "项目里哪些 Agent 会真正调用大模型？",
+      "reference": "IssueAgent、PRReviewAgent、CIDebugAgent 会真正调用 LLM；Planner、Observer、Synthesis、Safety 等其余组件是确定性的 Python 逻辑，不调用模型。",
+      "must_include": [
+        "IssueAgent"
+      ]
+    }
+  ]
+}
