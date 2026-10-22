@@ -2,7 +2,7 @@
 
 README 中承诺的正式基准位于 docs/datas/evals/rag_cases.json，评测提交接口
 会按该文件构建评测集。本测试用于保证文档承诺与仓库内容一致，避免出现
-「文档写着有、实际不存在」导致评测提交后返回 no_cases 的情况。
+「文档写着有、实际不存在」导致评测页拿不到任何固定评测集的情况。
 """
 
 from __future__ import annotations
@@ -22,7 +22,8 @@ def test_rag_eval_baseline_file_exists() -> None:
     relative = BASELINE_PATH.relative_to(PROJECT_ROOT)
     assert BASELINE_PATH.is_file(), (
         f"README 承诺的评测基准不存在：{relative}。"
-        "评测提交后无法构建评测集，接口会返回 no_cases。"
+        "评测页因此拿不到任何固定评测集，按 suite_id 提交时接口返回"
+        " 400「未找到评测集」。"
     )
 
 
